@@ -1,9 +1,9 @@
 ##Important!
 There appears to be a new issue with deploying fat binaries to the App Store, that’s why we use the #if !(TARGET_IPHONE_SIMULATOR) directive. TRLS framework will work only on device. Don’t worry, you don’t need the library working on the simulator. We are working on a solution.
 
-##Sample project
-• http://www.ad4map.com/mobile/TRLS/TLRSSample_iOS.zip Prerequisites
-• iOS 8.0 or higher Frameworks
+##Prerequisites
+- iOS 8.0 or higher Frameworks
+-
 Add the frameworks below to your project:
 • CoreLocation.framework
 • Foundation.framework
