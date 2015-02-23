@@ -136,8 +136,8 @@ Now you must register the current device for push. If you already register your 
 ```objective-c
 - (BOOL)application:(UIApplication *)application
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [self registerDeviceForPushNotifications];
   #if !(TARGET_IPHONE_SIMULATOR)
+    [self registerDeviceForPushNotifications];
     [TRLS startWithExternalId:@"externalId" clientId:@"clientId" name:@"deviceName" phone:@"devicePhoneNumber"];
   #endif
 }
