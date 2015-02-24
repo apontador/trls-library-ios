@@ -1,6 +1,0 @@
-framework module TRLSFramework {
-  umbrella header "TRLSFramework.h"
-
-  export *
-  module * { export * }
-}
