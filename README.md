@@ -40,7 +40,13 @@ Add the Background Modes below to your target:
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   #if !(TARGET_IPHONE_SIMULATOR)
-    [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber"];
+    [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(BOOL success, NSString *deviceId) {
+        
+        if(success) NSLog(@"Device created %@", deviceId);
+        else NSLog(@"Error creating device");
+        
+      }];
+    ];
   #endif
 
 }
@@ -52,6 +58,8 @@ Add the Background Modes below to your target:
 - clientSecret – Request a client secret with TRLS dev team 
 - deviceName – Can be null or empty
 - devicePhoneNumber - Can be null or empty
+- devicePhoto - Can be null of empty
+- callback - Device creation callback
 
 ##Push notifications
 The first step is to create an App ID and the associated SSL certificate on the Apple Developer website. This certificate will allow the Parse server to send push notifications to the application identified by the App ID. If you already created the App ID and the associated SSL certificate, send the p12 file to TRLS dev team(Section Configuring your App ID for Development Push Notifications): 
