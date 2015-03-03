@@ -40,10 +40,10 @@ Add the Background Modes below to your target:
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   #if !(TARGET_IPHONE_SIMULATOR)
-    [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(BOOL success, NSString *deviceId) {
+    [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(NSString *deviceId, NSError *error) {
         
-        if(success) NSLog(@"Device created %@", deviceId);
-        else NSLog(@"Error creating device");
+        if(error == nil) NSLog(@"Device created %@", deviceId);
+        else NSLog(@"Error creating device %@", error.description);
         
       }];
     ];
