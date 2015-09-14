@@ -1,9 +1,7 @@
-##Important!
-There appears to be a new issue with deploying fat binaries to the App Store, that’s why we use the #if !(TARGET_IPHONE_SIMULATOR) directive. TRLS framework will work only on device. Don’t worry, you don’t need the library working on the simulator. We are working on a solution.
-
 ##Prerequisites
-- iOS 8.0 or higher Frameworks
+- iOS 8.0 or higher
 
+##Frameworks
 #####Add the frameworks below to your project:
 - CoreLocation.framework
 - Foundation.framework
@@ -16,30 +14,23 @@ There appears to be a new issue with deploying fat binaries to the App Store, th
 
 #####Property list file
 Add the properties below to your project plist file:
-- NSLocationAlwaysUsageDescription: Add the value “Location Services”
+- NSLocationAlwaysUsageDescription: Add any value, for example "Location Services"
 
 #####Capabilities
 Add the Background Modes below to your target:
-- Location updates
-- Uses Bluetooth LE accessories
 - Remote notifications
 
 ##Import the framework￼￼
-1. Select your project in the project navigator
-2. Choose File -> Add Files to “YOUR_PROJECT”
-3. Select the framework TRLS.framework and click “Add”
-4. In the containing applications target, add a new 'Copy File Build Phase'
-5. Set the 'Destination' to 'Frameworks'
-6. Drag in the created .framework
+1. Unarchive the zip file "TRLS.zip" and move the "TRLS" folder at the project root 
+2. Select your project target, General tab and add the TRLS/Release/TRLSFramework.framework under Embedded Binaries
+3. Select building settings tab and in the "Runpath Search Paths" and "Framework Search Paths" of your project target and test target add "$(PROJECT_DIR)/TRLS/$(CONFIGURATION)" for release and debug configurations
 
 ##Initialization
 ```objective-c
-#if !(TARGET_IPHONE_SIMULATOR)
 #import <TRLSFramework/TRLSFramework.h>
-#endif
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  #if !(TARGET_IPHONE_SIMULATOR)
+
     [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(NSString *deviceId, NSError *error) {
         
         if(error == nil) NSLog(@"Device created %@", deviceId);
@@ -47,8 +38,7 @@ Add the Background Modes below to your target:
         
       }];
     ];
-  #endif
-
+    
 }
 ```
 
@@ -144,30 +134,30 @@ Now you must register the current device for push. If you already register your 
 ```objective-c
 - (BOOL)application:(UIApplication *)application
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  #if !(TARGET_IPHONE_SIMULATOR)
+    
     [self registerDeviceForPushNotifications];
     [TRLS startWithExternalId:@"externalId" clientId:@"clientId" name:@"deviceName" phone:@"devicePhoneNumber"];
-  #endif
+    
 }
 ```
 
 Implement the callback method - application:didRegisterForRemoteNotificationsWithDeviceToken: in the app delegate. We need to inform TRLS about this new device:
 ```objective-c
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  #if !(TARGET_IPHONE_SIMULATOR)
+  
     [TRLS setDeviceToken:deviceToken];
-  #endif 
+   
 }
 ```
 To handle a notification, implement the method below in the app delegate. If you already use your own push notification service, you need to verifiy if the notification is from a TRLS server:
 ```objective-c
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-  #if !(TARGET_IPHONE_SIMULATOR)
+  
     if(![TRLS applicationDidReceiveRemoteNotification:userInfo]){
       //It's not a TRLS notification, you can process de push notification
     }else{
       //It's a TRLS notification, the library will process it automatically;
     }
-  #endif
+  
 }
 
