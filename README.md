@@ -31,7 +31,7 @@ Add the Background Modes below to your target:
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [TRLS startWithExternalId:@"externalId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(NSString *deviceId, NSError *error) {
+    [TRLS startWithUserId:@"userId" clientId:@"clientId" clientSecret:@"clientSecret" name:@"deviceName" phone:@"devicePhoneNumber" photo:devicePhoto callback:^(NSString *deviceId, NSError *error) {
         
         if(error == nil) NSLog(@"Device created %@", deviceId);
         else NSLog(@"Error creating device %@", error.description);
@@ -43,7 +43,7 @@ Add the Background Modes below to your target:
 ```
 
 #####Parameters:
-- externalId – Provide an ID for this device(can be null or empty) 
+- userId – Provide an ID for this device(can be null or empty) 
 - clientId – Request a client id with TRLS dev team
 - clientSecret – Request a client secret with TRLS dev team 
 - deviceName – Can be null or empty
