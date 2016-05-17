@@ -160,4 +160,27 @@ To handle a notification, implement the method below in the app delegate. If you
     }
   
 }
+```
+##Customize the UI for Your App
+Once you've set up your library integration, you can customize the UI to match the color scheme and branding of your app to ensure the best user experience for your users.
+
+Import the class 
+```objective-c
+#import "TRLSMessageAppearance.h"
+```
+You can customize the following properties
+```objective-c
+    // Colors
+    [TRLSMessageAppearance setTextColor:[UIColor blueColor]];
+    [TRLSMessageAppearance setBackgroundColor:[UIColor grayColor]];
+    [TRLSMessageAppearance setButtonBackgroundColor:[UIColor yellowColor]];
+    [TRLSMessageAppearance setButtonTextColor:[UIColor greenColor]];
+    [TRLSMessageAppearance setTitleColor:[UIColor blackColor]];
+    
+    //Fonts
+    [TRLSMessageAppearance setTitleFont:[UIFont systemFontOfSize:9.0]];
+    [TRLSMessageAppearance setButtonTextFont:[UIFont boldSystemFontOfSize:18.0]];
+    [TRLSMessageAppearance setTextFont:[UIFont italicSystemFontOfSize:12.0]];
+```
+
 
