@@ -20,6 +20,12 @@ Add the properties below to your project plist file:
 Add the Background Modes below to your target:
 - Remote notifications
 
+##Cocoapods  
+Add the TRLSFramework pod to your Podfile:
+```objective-c
+    pod 'TRLSFramework'
+```
+
 ##Import the framework￼￼
 1. Unarchive the zip file "TRLS.zip" and move the "TRLS" folder at the project root 
 2. Select your project target, General tab and add the TRLS/Release/TRLSFramework.framework under Embedded Binaries
